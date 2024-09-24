@@ -9,6 +9,8 @@
 ### Fibonacci Function
 
 ```coffeescript
+import { memoize } from "@dashkite/joy/function"
+
 fib = Generic.make "fib", "Fibonacci sequence"
   .define [ gte 0 ], memoize ( n ) -> ( fib n - 1 ) + ( fib n - 2 )
   .define [ eq 1 ], -> 1
@@ -21,9 +23,11 @@ assert.throws -> fib 0
 ### Polymorphism
 
 ```coffeescript
+import { has } from "@dashkite/joy/object"
+
 length = Generic.make "size", "Return the size of a value"
 	# based on interface
-	.define [ Obj.has "length" ], ( value ) -> value.length
+	.define [ has "length" ], ( value ) -> value.length
   # based on type
   .define [ Object ], ( object ) -> ( Object.keys object ).length
 	.define [ Set ], ( set ) -> set.values().length
