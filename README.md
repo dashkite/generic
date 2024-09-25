@@ -26,11 +26,11 @@ assert.throws -> fib 0
 import { has } from "@dashkite/joy/object"
 
 length = Generic.make "size", "Return the size of a value"
-	# based on interface
-	.define [ has "length" ], ( value ) -> value.length
+  # based on interface
+  .define [ has "length" ], ( value ) -> value.length
   # based on type
   .define [ Object ], ( object ) -> ( Object.keys object ).length
-	.define [ Set ], ( set ) -> set.values().length
+  .define [ Set ], ( set ) -> set.values().length
   
 assert.equal 5, size "hello"
 assert.equal 3, size [ 1..3 ]
