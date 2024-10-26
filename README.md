@@ -38,3 +38,20 @@ assert.equal 2, size x: 0, y: 0
 assert.equal 1, size new Set [ true ]
 ```
 
+### Method Dispatch
+
+```coffeescript
+class Adder
+  constructor: ( @total = 0 ) ->
+  add: ( f = Generic.make "Adder::add" )
+    .define [ Number ], ( operand ) -> 
+      @total += operand
+      @
+  
+assert.equal 12, 
+  ( new Adder )
+    .add 5
+    .add 7
+    .total
+```
+

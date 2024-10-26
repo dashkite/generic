@@ -72,7 +72,7 @@ do ->
       assert.equal 10, f 5
       assert.equal "**", g "*"
 
-    test "As methods", ->
+    test "Method Dispatch", ->
 
       class Adder
         constructor: ( @total = 0 ) ->
