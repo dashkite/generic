@@ -36,9 +36,11 @@ class GenericFunction extends ExtensibleFunction
   @dispatch: ( target, args ) -> target.dispatch args
 
   constructor: ({ name, @description, @default }) ->
-    # we need to use `this` here to pacify 
-    # coffeescript compiler
-    super ( args... ) => this.dispatch args
+    # we need to forward declare self because we
+    # can't assign to `this` until we call super
+    self = undefined
+    super ( args... ) -> self.dispatch args, @
+    self = @
     # override the built-in name property
     Object.defineProperty this, "name", 
       value: name ? "anonymous-generic"
@@ -98,8 +100,8 @@ class GenericFunction extends ExtensibleFunction
     # if exit the loop without returning a match, return the default
     @default
 
-  dispatch: ( args ) ->
+  dispatch: ( args, self ) ->
     f = @lookup args
-    f args...
+    f.apply self, args
 
 export default GenericFunction

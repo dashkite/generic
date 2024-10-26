@@ -72,6 +72,21 @@ do ->
       assert.equal 10, f 5
       assert.equal "**", g "*"
 
+    test "As methods", ->
+
+      class Adder
+        constructor: ( @total = 0 ) ->
+        add: ( f = Generic.make "Adder::add" )
+          .define [ Number ], ( operand ) -> 
+            @total += operand
+            @
+        
+      assert.equal 12, 
+        ( new Adder )
+          .add 5
+          .add 7
+          .total
+  
   ]
 
   process.exit if success then 0 else 1
