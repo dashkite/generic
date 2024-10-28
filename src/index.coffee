@@ -52,6 +52,12 @@ class GenericFunction extends ExtensibleFunction
       error.arguments = args
       throw error
 
+  description: ( @description ) -> @
+
+  set: ( key, value ) -> 
+    @[ key ] = value
+    @
+  
   define: ( terms, f ) ->
     terms = terms.map transform
     @entries.unshift { terms, f }

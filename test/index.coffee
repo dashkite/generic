@@ -34,8 +34,8 @@ do ->
       class XString extends String
 
       greet = Generic.make "greet"
-        .define [ XString ], ( greeting ) -> "#{ greeting }!"
         .define [ String ], ( greeting ) -> greeting
+        .define [ XString ], ( greeting ) -> "#{ greeting }!"
 
       assert.equal "hello", greet "hello"
       assert.equal "hello!", greet new XString "hello"

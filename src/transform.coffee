@@ -1,4 +1,4 @@
-import { isType as isTypeOf, isFunction, isObject } from "@dashkite/joy/type"
+import { isKind as isTypeOf, isFunction, isObject } from "@dashkite/joy/type"
 
 # check to see if the type name starts with a capital
 # hopefully we can do better than this somehow...
