@@ -1,5 +1,6 @@
 import { isType as isTypeOf, isFunction, isObject } from "@dashkite/joy/type"
 
+# check to see if the type name starts with a capital
 # hopefully we can do better than this somehow...
 isType = ( value ) -> 
   value?.prototype?.constructor?.name?[0] <= "a"
