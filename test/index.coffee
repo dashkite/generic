@@ -48,15 +48,16 @@ do ->
 
       assert.deepEqual [ 1, 2, 3 ], list 1, 2, 3
 
-
     test "built-in types", ->
 
-      list = Generic.make "list"
-        .define [ Object ], ( object ) -> Object.entries object
-        .define [ Array ], ( array ) -> array
+      cat = Generic.make "cat"
+        .define [ Object, Object ], ( a, b ) -> { a..., b... }
+        .define [ Array, Array ], ( a, b ) -> [ a..., b... ]
+        .define [ String, String ], ( a, b ) -> a + b
       
-      assert.deepEqual [1..5 ], list [ 1..5 ]
-      assert.deepEqual [ [ "foo", "bar" ]], list foo: "bar"
+      assert.deepEqual { x: 1, y: 2, z: 3 }, cat { x: 1, y: 2 }, { z: 3}
+      assert.deepEqual [1, 2, 3 ], cat [ 1, 2 ], [ 3]
+      assert.equal "abcdef", cat "abc", "def"
 
     test "Generics are functions", ->
       assert isFunction Generic.make "test"
