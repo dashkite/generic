@@ -12,7 +12,7 @@ do ->
 
     test "Fibonacci function", do ->
 
-      fib = Generic.make "fib", "Fibonacci sequence"
+      fib = Generic.make "fib"
         .define [ gte 0 ], memoize ( n ) -> ( fib n - 1 ) + ( fib n - 2 )
         .define [ eq 1 ], -> 1
         .define [ eq 2 ], -> 1

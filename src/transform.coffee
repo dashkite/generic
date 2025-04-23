@@ -1,20 +1,16 @@
-import { isKind as isTypeOf, isFunction, isObject } from "@dashkite/joy/type"
+import * as Type from "@dashkite/joy/type"
 
-# check to see if the type name starts with a capital
-# hopefully we can do better than this somehow...
-isType = ( value ) -> 
-  value?.prototype?.constructor?.name?[0] <= "a"
-
-equal = ( value ) ->
-  ( target ) -> value == target
+# sigh...
+isType = ( term ) -> 
+  term?.prototype?.constructor?.name?[0] <= "a"
 
 transform = ( term ) ->
-  if isFunction term
+  if Type.isFunction term
     if isType term
-      isTypeOf term
+      Type.isKind term
     else
       term
   else
-    equal term
+    ( value ) -> term == value
 
 export default transform
