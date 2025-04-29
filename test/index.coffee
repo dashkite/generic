@@ -88,6 +88,13 @@ do ->
           .add 7
           .total
   
+    test "undefined and null", ->
+      sprint = Generic.make "sprint"
+        .define [ String ], ( text ) -> text
+        .define [ undefined ], -> ""
+        .define [ null ], -> ""
+      assert.equal "", sprint undefined
+      assert.equal "", sprint null
   ]
 
   process.exit if success then 0 else 1
