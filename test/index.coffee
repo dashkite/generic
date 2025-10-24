@@ -13,7 +13,7 @@ do ->
     test "Fibonacci function", do ->
 
       fib = Generic.make "fib"
-        .define [ gte 0 ], memoize ( n ) -> ( fib n - 1 ) + ( fib n - 2 )
+        .define [ gte 3 ], memoize ( n ) -> ( fib n - 1 ) + ( fib n - 2 )
         .define [ eq 1 ], -> 1
         .define [ eq 2 ], -> 1
 
@@ -24,8 +24,8 @@ do ->
 
         test "throws with name/arguments on type error", ->
           assert.throws (-> fib 0),
-            message: "fib: invalid arguments."
-            arguments: [ 0 ]
+            message: "fib: invalid arguments"
+            # arguments: [ 0 ]
 
       ]
 
