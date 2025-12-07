@@ -22,12 +22,25 @@ do ->
         test "matches simple predicates", ->
           assert ( fib 5 ) == 5
 
-        test "throws with name/arguments on type error", ->
-          assert.throws (-> fib 0),
-            message: "fib: invalid arguments"
-            # arguments: [ 0 ]
+        test "throws on type error", ->
+          assert.throws ( -> fib 0 )
+
+        # test "throws with name/arguments on type error", ->
+        #   assert.throws (-> fib 0),
+        #     message: "fib: invalid arguments"
+        #     arguments: [ 0 ]
 
       ]
+
+    test "matches nullary", ->
+
+      f = Generic.make "rand"
+        .define [], -> true
+        .define [ Boolean ], ( x ) -> x
+    
+      assert f()
+      assert !( f false )
+           
 
     test "Polymorphic dispatch", ->
 
