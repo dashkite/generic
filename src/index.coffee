@@ -33,13 +33,13 @@ class GenericFunction extends ExtensibleFunction
 
   @lookup: ( target, args ) -> target.lookup args
 
-  @dispatch: ( target, args ) -> target.dispatch args
+  @dispatch: ( target, args ) -> target.dispatch null, args
 
   constructor: ({ name, @description, @default }) ->
     # we need to forward declare self because we
     # can't assign to `this` until we call super
     self = undefined
-    super ( args... ) -> self.dispatch args, @
+    super ( args... ) -> self.dispatch @, args
     self = @
     # override the built-in name property
     Object.defineProperty this, "name", 
@@ -106,7 +106,7 @@ class GenericFunction extends ExtensibleFunction
     # if exit the loop without returning a match, return the default
     @default
 
-  dispatch: ( args, self ) ->
+  dispatch: ( self, args ) ->
     f = @lookup args
     f.apply self, args
 
